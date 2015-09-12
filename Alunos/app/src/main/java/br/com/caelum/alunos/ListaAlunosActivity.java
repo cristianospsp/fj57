@@ -1,6 +1,7 @@
 package br.com.caelum.alunos;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +28,18 @@ public class ListaAlunosActivity extends Activity {
 
         ListView listView = (ListView) findViewById(R.id.lista);
 
+        View botaoAdiciona = findViewById(R.id.lista_alunos_floating_button);
+
         listView.setAdapter(alunosAdapter);
+
+        botaoAdiciona.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+                startActivity(intent);
+                //Toast.makeText(ListaAlunosActivity.this, "Ir para formulario...", Toast.LENGTH_LONG ).show();
+            }
+        });
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
