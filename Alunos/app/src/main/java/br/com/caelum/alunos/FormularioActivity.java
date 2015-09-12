@@ -8,13 +8,19 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
+
 
 public class FormularioActivity extends ActionBarActivity {
+
+    private FormularioActivityHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+
+        this.helper = new FormularioActivityHelper(this);
 
         //View salvar = findViewById(R.id.formulario_botao);
        // final EditText nome = (EditText)findViewById(R.id.formulario_nome);
@@ -49,7 +55,8 @@ public class FormularioActivity extends ActionBarActivity {
 
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
-                Toast.makeText(this, "OK - Clicado", Toast.LENGTH_LONG).show();
+                Aluno aluno = new FormularioActivityHelper(this).pegaAluno();
+                Toast.makeText(this, "Incluir Aluno(a): " + aluno, Toast.LENGTH_LONG).show();
                 finish();
                 return false;
             default:
