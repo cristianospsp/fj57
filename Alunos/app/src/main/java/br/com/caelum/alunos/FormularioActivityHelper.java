@@ -37,4 +37,12 @@ public class FormularioActivityHelper {
 
         return this.aluno;
     }
+
+    public boolean temNome() {
+        return !this.nome.getText().toString().isEmpty();
+    }
+
+    public void mostraErro() {
+        this.nome.setError("Campo nome não pode ser vazio");
+    }
 }

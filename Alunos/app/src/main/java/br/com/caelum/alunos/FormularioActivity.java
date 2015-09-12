@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import br.com.caelum.alunos.br.com.caelum.alunos.dao.AlunoDAO;
 import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
 
 
@@ -55,10 +56,17 @@ public class FormularioActivity extends ActionBarActivity {
 
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
-                Aluno aluno = new FormularioActivityHelper(this).pegaAluno();
-                Toast.makeText(this, "Incluir Aluno(a): " + aluno, Toast.LENGTH_LONG).show();
-                finish();
-                return false;
+                FormularioActivityHelper helper = new FormularioActivityHelper(this);
+                if (helper.temNome()) {
+                    AlunoDAO alunoDAO = new AlunoDAO(this);
+                    alunoDAO.insere(helper.pegaAluno());
+                    finish();
+                    return true;
+                } else {
+                    helper.mostraErro();
+                    return false;
+                }
+
             default:
                 return super.onOptionsItemSelected(item);
         }
