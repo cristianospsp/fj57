@@ -3,14 +3,12 @@ package br.com.caelum.alunos;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.Arrays;
 import java.util.List;
 
 import br.com.caelum.alunos.br.com.caelum.alunos.dao.AlunoDAO;
@@ -22,6 +20,7 @@ import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
 public class ListaAlunosActivity extends Activity {
 
     private List<Aluno> alunos;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +29,11 @@ public class ListaAlunosActivity extends Activity {
 
         //List<String> alunos = Arrays.asList("Maria Clara", "Juliana Alvez", "Tião Macalé");
 
-        AlunoDAO alunoDAO = new AlunoDAO(this);
-        alunos = alunoDAO.getList();
-        alunoDAO.close();
-
-        ArrayAdapter<Aluno> alunosAdapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
-
-        ListView listView = (ListView) findViewById(R.id.lista);
+        listView = (ListView) findViewById(R.id.lista);
 
         View botaoAdiciona = findViewById(R.id.lista_alunos_floating_button);
 
-        listView.setAdapter(alunosAdapter);
+        carregaLista();
 
         botaoAdiciona.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +68,22 @@ public class ListaAlunosActivity extends Activity {
             }
         });
 
-
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        carregaLista();
+    }
+
+    private void carregaLista() {
+        AlunoDAO alunoDAO = new AlunoDAO(this);
+        alunos = alunoDAO.getList();
+        alunoDAO.close();
+
+        ArrayAdapter<Aluno> alunosAdapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+
+        this.listView.setAdapter(alunosAdapter);
+    }
+
 }
