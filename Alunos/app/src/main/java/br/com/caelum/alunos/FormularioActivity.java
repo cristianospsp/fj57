@@ -60,6 +60,7 @@ public class FormularioActivity extends ActionBarActivity {
                 if (helper.temNome()) {
                     AlunoDAO alunoDAO = new AlunoDAO(this);
                     alunoDAO.insere(helper.pegaAluno());
+                    alunoDAO.close();
                     finish();
                     return true;
                 } else {
