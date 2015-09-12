@@ -4,6 +4,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class FormularioActivity extends ActionBarActivity {
@@ -12,6 +15,16 @@ public class FormularioActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+
+        View salvar = findViewById(R.id.formulario_botao);
+        final EditText nome = (EditText)findViewById(R.id.formulario_nome);
+
+        salvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FormularioActivity.this, "Salvar Estudante: " + nome.getText(), Toast.LENGTH_LONG ).show();
+            }
+        });
     }
 
 
