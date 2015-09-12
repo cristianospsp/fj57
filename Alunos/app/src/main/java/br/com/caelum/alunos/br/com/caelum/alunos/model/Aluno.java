@@ -62,12 +62,6 @@ public class Aluno {
 
     @Override
     public String toString() {
-        return "Aluno{" +
-                "nome='" + nome + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", site='" + site + '\'' +
-                ", nota=" + nota +
-                '}';
+        return this.nome;
     }
 }

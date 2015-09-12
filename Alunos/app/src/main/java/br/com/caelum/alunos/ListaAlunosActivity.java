@@ -13,18 +13,28 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.List;
 
+import br.com.caelum.alunos.br.com.caelum.alunos.dao.AlunoDAO;
+import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
+
 /**
  * Created by android5243 on 05/09/15.
  */
 public class ListaAlunosActivity extends Activity {
+
+    private List<Aluno> alunos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista);
 
-        List<String> alunos = Arrays.asList("Maria Clara", "Juliana Alvez", "Tião Macalé");
-        ArrayAdapter alunosAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, alunos);
+        //List<String> alunos = Arrays.asList("Maria Clara", "Juliana Alvez", "Tião Macalé");
+
+        AlunoDAO alunoDAO = new AlunoDAO(this);
+        alunos = alunoDAO.getList();
+        alunoDAO.close();
+
+        ArrayAdapter<Aluno> alunosAdapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
 
         ListView listView = (ListView) findViewById(R.id.lista);
 
@@ -45,8 +55,7 @@ public class ListaAlunosActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String aluno = (String) parent.getItemAtPosition(position);
-                Log.i("Selecionado: ", aluno);
+                Aluno aluno = (Aluno) parent.getItemAtPosition(position);
 
                 Toast.makeText(ListaAlunosActivity.this, "Aluno: " + aluno, Toast.LENGTH_LONG ).show();
 
@@ -59,8 +68,7 @@ public class ListaAlunosActivity extends Activity {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                String aluno = (String) parent.getItemAtPosition(position);
-                Log.i("Selecionado: ", aluno);
+                Aluno aluno = (Aluno) parent.getItemAtPosition(position);
 
                 Toast.makeText(ListaAlunosActivity.this, "Aluno: " + aluno + " pronto para ser editado !", Toast.LENGTH_LONG).show();
                 return true;
