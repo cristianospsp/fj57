@@ -48,11 +48,11 @@
             android:layout_gravity="center_horizontal"
             android:numStars="5"/>
 
-        <Button
+        <!--<Button
             android:id="@+id/formulario_botao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salvar"/>
+            android:text="Salvar"/>-->
 
     </LinearLayout>
 
