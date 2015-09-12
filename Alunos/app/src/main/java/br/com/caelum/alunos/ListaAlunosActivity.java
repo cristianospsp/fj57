@@ -33,7 +33,7 @@ public class ListaAlunosActivity extends Activity {
 
         View botaoAdiciona = findViewById(R.id.lista_alunos_floating_button);
 
-        carregaLista();
+        //carregaLista();
 
         botaoAdiciona.setOnClickListener(new View.OnClickListener() {
             @Override
