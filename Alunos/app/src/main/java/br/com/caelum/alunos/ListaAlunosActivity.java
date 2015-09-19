@@ -1,6 +1,8 @@
 package br.com.caelum.alunos;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -29,18 +31,32 @@ public class ListaAlunosActivity extends ActionBarActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
+        MenuItem ligar = menu.add("Ligar");
+        MenuItem enviarSms = menu.add("Enviar SMS");
+        MenuItem acharNoMapa = menu.add("Achar no Mapa");
+        MenuItem navegarNoSite = menu.add("Navegar no Site");
         MenuItem deletar = menu.add("Deletar");
 
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                AlunoDAO alunoDAO = new AlunoDAO(ListaAlunosActivity.this);
-                AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo)menuInfo;
-                Aluno aluno = (Aluno)listView.getItemAtPosition(((AdapterView.AdapterContextMenuInfo) menuInfo).position);
-                alunoDAO.delete(aluno);
-                alunoDAO.close();
-                Toast.makeText(ListaAlunosActivity.this, "Aluno: " + aluno + " excluído !", Toast.LENGTH_LONG).show();
-                carregaLista();
+                new AlertDialog.Builder(ListaAlunosActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Deletar")
+                        .setMessage("Deseja mesmo deletar ?")
+                        .setPositiveButton("Quero", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                AlunoDAO alunoDAO = new AlunoDAO(ListaAlunosActivity.this);
+                                AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo)menuInfo;
+                                Aluno aluno = (Aluno)listView.getItemAtPosition(((AdapterView.AdapterContextMenuInfo) menuInfo).position);
+                                alunoDAO.delete(aluno);
+                                alunoDAO.close();
+                                carregaLista();
+                            }
+                        }).setNegativeButton("Não", null).show();
+
+
                 return false;
             }
         });
