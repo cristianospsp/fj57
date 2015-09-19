@@ -3,6 +3,9 @@ package br.com.caelum.alunos;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,10 +20,32 @@ import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
 /**
  * Created by android5243 on 05/09/15.
  */
-public class ListaAlunosActivity extends Activity {
+public class ListaAlunosActivity extends ActionBarActivity {
 
     private List<Aluno> alunos;
     private ListView listView;
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuItem deletar = menu.add("Deletar");
+
+        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AlunoDAO alunoDAO = new AlunoDAO(ListaAlunosActivity.this);
+                AdapterView.AdapterContextMenuInfo adapterContextMenuInfo = (AdapterView.AdapterContextMenuInfo)menuInfo;
+                Aluno aluno = (Aluno)listView.getItemAtPosition(((AdapterView.AdapterContextMenuInfo) menuInfo).position);
+                alunoDAO.delete(aluno);
+                alunoDAO.close();
+                Toast.makeText(ListaAlunosActivity.this, "Aluno: " + aluno + " excluído !", Toast.LENGTH_LONG).show();
+                carregaLista();
+                return false;
+            }
+        });
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +86,14 @@ public class ListaAlunosActivity extends Activity {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Aluno aluno = (Aluno) parent.getItemAtPosition(position);
+              //  Aluno aluno = (Aluno) parent.getItemAtPosition(position);
 
-                Toast.makeText(ListaAlunosActivity.this, "Aluno: " + aluno + " pronto para ser editado !", Toast.LENGTH_LONG).show();
-                return true;
+                //Toast.makeText(ListaAlunosActivity.this, "Aluno: " + aluno + " pronto para ser editado !", Toast.LENGTH_LONG).show();
+                return false;
             }
         });
 
+        registerForContextMenu(listView);
     }
 
     @Override
