@@ -98,4 +98,12 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
         getWritableDatabase().update(TABLE, campos, "id=?", values);
     }
+
+    public void insertOrUpdate(Aluno aluno) {
+        if (aluno.getId() == null) {
+            insere(aluno);
+        } else {
+            update(aluno);
+        }
+    }
 }

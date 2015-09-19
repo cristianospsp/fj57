@@ -68,7 +68,9 @@ public class FormularioActivity extends ActionBarActivity {
             case R.id.menu_formulario_ok:
                 Aluno aluno = helper.pegaAluno();
                 if (helper.temNome()) {
-                    incluirAlterar(aluno);
+                    AlunoDAO alunoDAO = new AlunoDAO(this);
+                    alunoDAO.insertOrUpdate(aluno);
+                    alunoDAO.close();
                     finish();
                     return true;
                 } else {
@@ -81,16 +83,5 @@ public class FormularioActivity extends ActionBarActivity {
         }
 
 
-    }
-
-    private void incluirAlterar(Aluno aluno) {
-        AlunoDAO alunoDAO = new AlunoDAO(this);
-
-        if(aluno.getId() == null) {
-            alunoDAO.insere(aluno);
-        }else{
-            alunoDAO.update(aluno);
-        }
-        alunoDAO.close();
     }
 }
