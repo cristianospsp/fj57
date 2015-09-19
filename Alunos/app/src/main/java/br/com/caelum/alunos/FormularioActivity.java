@@ -1,5 +1,6 @@
 package br.com.caelum.alunos;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.Serializable;
 
 import br.com.caelum.alunos.br.com.caelum.alunos.dao.AlunoDAO;
 import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
@@ -22,6 +25,13 @@ public class FormularioActivity extends ActionBarActivity {
         setContentView(R.layout.activity_formulario);
 
         this.helper = new FormularioActivityHelper(this);
+
+        Intent intent = getIntent();
+        Aluno alunoSelecionado = (Aluno)intent.getSerializableExtra("alunoSelecionado");
+
+        if (alunoSelecionado != null) {
+            this.helper.colocaNoFormulario(alunoSelecionado);
+        }
 
         //View salvar = findViewById(R.id.formulario_botao);
        // final EditText nome = (EditText)findViewById(R.id.formulario_nome);
@@ -56,11 +66,9 @@ public class FormularioActivity extends ActionBarActivity {
 
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
-                FormularioActivityHelper helper = new FormularioActivityHelper(this);
+                Aluno aluno = helper.pegaAluno();
                 if (helper.temNome()) {
-                    AlunoDAO alunoDAO = new AlunoDAO(this);
-                    alunoDAO.insere(helper.pegaAluno());
-                    alunoDAO.close();
+                    incluirAlterar(aluno);
                     finish();
                     return true;
                 } else {
@@ -73,5 +81,16 @@ public class FormularioActivity extends ActionBarActivity {
         }
 
 
+    }
+
+    private void incluirAlterar(Aluno aluno) {
+        AlunoDAO alunoDAO = new AlunoDAO(this);
+
+        if(aluno.getId() == null) {
+            alunoDAO.insere(aluno);
+        }else{
+            alunoDAO.update(aluno);
+        }
+        alunoDAO.close();
     }
 }

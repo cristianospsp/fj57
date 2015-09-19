@@ -1,9 +1,11 @@
 package br.com.caelum.alunos.br.com.caelum.alunos.model;
 
+import java.io.Serializable;
+
 /**
  * Created by android5243 on 12/09/15.
  */
-public class Aluno {
+public class Aluno implements Serializable {
 
     private Long id;
     private String nome;

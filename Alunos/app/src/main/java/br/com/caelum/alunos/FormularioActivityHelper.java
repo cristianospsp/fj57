@@ -10,12 +10,12 @@ import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
  */
 public class FormularioActivityHelper {
 
-    private final EditText nome;
-    private final EditText telefone;
-    private final EditText endereco;
-    private final EditText site;
-    private final RatingBar nota;
-    private final Aluno aluno;
+    private EditText nome;
+    private EditText telefone;
+    private EditText endereco;
+    private EditText site;
+    private RatingBar nota;
+    private Aluno aluno;
 
     public FormularioActivityHelper(FormularioActivity activity) {
         this.nome = (EditText)activity.findViewById(R.id.formulario_nome);
@@ -33,7 +33,7 @@ public class FormularioActivityHelper {
         this.aluno.setTelefone(this.telefone.getText().toString());
         this.aluno.setEndereco(this.endereco.getText().toString());
         this.aluno.setSite(this.site.getText().toString());
-        this.aluno.setNota(Double.valueOf(this.nota.getProgress()));
+        this.aluno.setNota(Double.valueOf(this.nota.getRating()));
 
         return this.aluno;
     }
@@ -45,4 +45,17 @@ public class FormularioActivityHelper {
     public void mostraErro() {
         this.nome.setError("Campo nome não pode ser vazio");
     }
+
+    public void colocaNoFormulario(Aluno alunoSelecionado) {
+        this.nome.setText(alunoSelecionado.getNome());
+        this.telefone.setText(alunoSelecionado.getTelefone());
+        this.endereco.setText(alunoSelecionado.getEndereco());
+        this.site.setText(alunoSelecionado.getSite());
+        this.nota.setRating(alunoSelecionado.getNota().floatValue());
+
+        this.aluno = alunoSelecionado;
+    }
+
+
+
 }
