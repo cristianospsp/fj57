@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
@@ -36,6 +37,30 @@ public class ListaAlunosActivity extends ActionBarActivity {
         MenuItem acharNoMapa = menu.add("Achar no Mapa");
         MenuItem navegarNoSite = menu.add("Navegar no Site");
         MenuItem deletar = menu.add("Deletar");
+
+        Aluno aluno = (Aluno)listView.getItemAtPosition(((AdapterView.AdapterContextMenuInfo) menuInfo).position);
+
+        Intent intentLigar = new Intent(Intent.ACTION_CALL);
+        intentLigar.setData(Uri.parse("tel:"+aluno.getTelefone()));
+        ligar.setIntent(intentLigar);
+
+        Intent intentSms = new Intent(Intent.ACTION_VIEW);
+        intentSms.setData(Uri.parse("sms:"+aluno.getTelefone()));
+        enviarSms.setIntent(intentSms);
+
+        Intent intentCharNoMapa = new Intent(Intent.ACTION_VIEW);
+        intentCharNoMapa.setData(Uri.parse("geo:0,0:?q="+aluno.getEndereco()));
+        acharNoMapa.setIntent(intentCharNoMapa);
+
+        String site = aluno.getSite();
+        if(!site.startsWith("http://")){
+            site = "http://" + site;
+        }
+
+        Intent intentNavegarNoSite = new Intent(Intent.ACTION_VIEW);
+        intentNavegarNoSite.setData(Uri.parse(site));
+        navegarNoSite.setIntent(intentNavegarNoSite);
+
 
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
