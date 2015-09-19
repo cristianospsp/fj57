@@ -17,7 +17,7 @@ import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
  */
 public class AlunoDAO extends SQLiteOpenHelper {
 
-    private static final int VERSAO = 2;
+    private static final int VERSAO = 6;
     private static final String DATABASE = "CadastroCaelum";
     private static final String TABLE = "ALUNOS";
 
@@ -37,11 +37,12 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        StringBuilder ddl = new StringBuilder("DROP TABLE IF EXISTS ")
-                .append(TABLE)
+       // StringBuilder ddl = new StringBuilder("DROP TABLE IF EXISTS ")
+        StringBuilder ddl = new StringBuilder("ALTER TABLE " + TABLE + " ADD COLUMN caminhoFoto TEXT")
+                //.append(TABLE)
                 .append(";");
         db.execSQL(ddl.toString());
-        onCreate(db);
+       // onCreate(db);
     }
 
     public void insere(Aluno aluno) {
@@ -51,6 +52,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         values.put("site", aluno.getSite());
         values.put("endereco", aluno.getEndereco());
         values.put("telefone", aluno.getTelefone());
+        values.put("caminhoFoto", aluno.getCaminhoFoto());
 
         getWritableDatabase().insert(TABLE, null, values);
     }
@@ -71,6 +73,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
             aluno.setEndereco(c.getString(c.getColumnIndex("endereco")));
             aluno.setTelefone(c.getString(c.getColumnIndex("telefone")));
             aluno.setNota(c.getDouble(c.getColumnIndex("nota")));
+            aluno.setCaminhoFoto(c.getString(c.getColumnIndex("caminhoFoto")));
 
             alunos.add(aluno);
         }
@@ -93,6 +96,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         campos.put("site", aluno.getSite());
         campos.put("endereco", aluno.getEndereco());
         campos.put("telefone", aluno.getTelefone());
+        campos.put("caminhoFoto", aluno.getCaminhoFoto());
 
         String []values = { aluno.getId().toString() };
 
