@@ -15,7 +15,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by android5243 on 26/09/15.
  */
-public class WebClient extends AsyncTask<String, Void, String>{
+public class WebClient {
 
     private static final String URL = "http://www.caelum.com.br/mobile";
 
@@ -44,8 +44,4 @@ public class WebClient extends AsyncTask<String, Void, String>{
 
     }
 
-    @Override
-    protected String doInBackground(String... params) {
-        return post(params[0]);
-    }
 }

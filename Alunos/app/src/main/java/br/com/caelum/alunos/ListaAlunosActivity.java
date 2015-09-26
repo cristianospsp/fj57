@@ -23,6 +23,7 @@ import br.com.caelum.alunos.converter.AlunoConverter;
 import br.com.caelum.alunos.dao.AlunoDAO;
 import br.com.caelum.alunos.model.Aluno;
 import br.com.caelum.alunos.support.WebClient;
+import br.com.caelum.alunos.task.EnviaAlunosTask;
 
 /**
  * Created by android5243 on 05/09/15.
@@ -171,7 +172,9 @@ public class ListaAlunosActivity extends ActionBarActivity {
 
         switch (item.getItemId()) {
             case R.id.menu_enviar_notas:
-                AlunoDAO dao = new AlunoDAO(this);
+                new EnviaAlunosTask(this).execute();
+                return true;
+               /* AlunoDAO dao = new AlunoDAO(this);
                 List<Aluno> alunos = dao.getList();
                 dao.close();
 
@@ -186,14 +189,9 @@ public class ListaAlunosActivity extends ActionBarActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
+                    e.printStackTrace();*/
+               // }
         }
-
 
         return super.onOptionsItemSelected(item);
     }
