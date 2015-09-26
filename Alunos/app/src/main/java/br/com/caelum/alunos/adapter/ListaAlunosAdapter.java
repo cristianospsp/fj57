@@ -51,9 +51,18 @@ public class ListaAlunosAdapter extends BaseAdapter {
         Aluno aluno = alunos.get(position);
 
         TextView nomeView = (TextView)inflate.findViewById(R.id.item_nome);
+        TextView telefoneView = (TextView)inflate.findViewById(R.id.item_telefone);
+        TextView siteView = (TextView)inflate.findViewById(R.id.item_site);
         ImageView fotoView = (ImageView)inflate.findViewById(R.id.item_foto);
 
         nomeView.setText(aluno.getNome());
+        if (telefoneView != null) {
+            telefoneView.setText(aluno.getTelefone());
+        }
+
+        if (siteView != null) {
+            siteView.setText(aluno.getSite());
+        }
 
         Bitmap imagem;
         if (aluno.getCaminhoFoto() != null) {

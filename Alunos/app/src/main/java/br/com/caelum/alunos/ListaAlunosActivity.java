@@ -98,20 +98,16 @@ public class ListaAlunosActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lista);
 
-        //List<String> alunos = Arrays.asList("Maria Clara", "Juliana Alvez", "Tião Macalé");
-
         listView = (ListView) findViewById(R.id.lista);
 
         View botaoAdiciona = findViewById(R.id.lista_alunos_floating_button);
 
-        //carregaLista();
 
         botaoAdiciona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
                 startActivity(intent);
-                //Toast.makeText(ListaAlunosActivity.this, "Ir para formulario...", Toast.LENGTH_LONG ).show();
             }
         });
 
@@ -154,7 +150,6 @@ public class ListaAlunosActivity extends ActionBarActivity {
         alunos = alunoDAO.getList();
         alunoDAO.close();
 
-        //ArrayAdapter<Aluno> alunosAdapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
         ListaAlunosAdapter listaAlunosAdapter = new ListaAlunosAdapter(alunos, this.getLayoutInflater());
 
         this.listView.setAdapter(listaAlunosAdapter);
@@ -174,23 +169,6 @@ public class ListaAlunosActivity extends ActionBarActivity {
             case R.id.menu_enviar_notas:
                 new EnviaAlunosTask(this).execute();
                 return true;
-               /* AlunoDAO dao = new AlunoDAO(this);
-                List<Aluno> alunos = dao.getList();
-                dao.close();
-
-                String json = new AlunoConverter(alunos).toJson();
-
-                WebClient client = new WebClient();
-                String resposta = null;
-                try {
-                    resposta = client.execute(json).get();
-                    Toast.makeText(this, resposta, Toast.LENGTH_LONG).show();
-                return true;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();*/
-               // }
         }
 
         return super.onOptionsItemSelected(item);
