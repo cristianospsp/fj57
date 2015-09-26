@@ -58,11 +58,12 @@ public class ListaAlunosAdapter extends BaseAdapter {
         Bitmap imagem;
         if (aluno.getCaminhoFoto() != null) {
             imagem = BitmapFactory.decodeFile(aluno.getCaminhoFoto());
+            imagem = Bitmap.createScaledBitmap(imagem, 150, 250, true);
         } else {
             imagem = BitmapFactory.decodeResource(inflater.getContext().getResources(), R.drawable.ic_no_image);
+            imagem = Bitmap.createScaledBitmap(imagem, 100, 100, true);
         }
 
-        imagem = Bitmap.createScaledBitmap(imagem, 100, 100, true);
 
         fotoView.setImageBitmap(imagem);
 

@@ -7,17 +7,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import br.com.caelum.alunos.adapter.ListaAlunosAdapter;
+import br.com.caelum.alunos.converter.AlunoConverter;
 import br.com.caelum.alunos.dao.AlunoDAO;
 import br.com.caelum.alunos.model.Aluno;
+import br.com.caelum.alunos.support.WebClient;
 
 /**
  * Created by android5243 on 05/09/15.
@@ -154,4 +159,42 @@ public class ListaAlunosActivity extends ActionBarActivity {
         this.listView.setAdapter(listaAlunosAdapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lista_alunos, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.menu_enviar_notas:
+                AlunoDAO dao = new AlunoDAO(this);
+                List<Aluno> alunos = dao.getList();
+                dao.close();
+
+                String json = new AlunoConverter(alunos).toJson();
+
+                WebClient client = new WebClient();
+                String resposta = null;
+                try {
+                    resposta = client.execute(json).get();
+                    Toast.makeText(this, resposta, Toast.LENGTH_LONG).show();
+                return true;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+
+
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }
