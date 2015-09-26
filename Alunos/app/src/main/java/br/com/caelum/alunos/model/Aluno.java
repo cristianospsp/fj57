@@ -1,4 +1,4 @@
-package br.com.caelum.alunos.br.com.caelum.alunos.model;
+package br.com.caelum.alunos.model;
 
 import java.io.Serializable;
 

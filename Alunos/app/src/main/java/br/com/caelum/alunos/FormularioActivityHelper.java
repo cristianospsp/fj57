@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
-import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
+import br.com.caelum.alunos.model.Aluno;
 
 /**
  * Created by android5243 on 12/09/15.

@@ -10,14 +10,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import java.io.File;
-import java.io.Serializable;
 
-import br.com.caelum.alunos.br.com.caelum.alunos.dao.AlunoDAO;
-import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
+import br.com.caelum.alunos.dao.AlunoDAO;
+import br.com.caelum.alunos.model.Aluno;
 
 
 public class FormularioActivity extends ActionBarActivity {

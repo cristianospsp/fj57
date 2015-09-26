@@ -1,6 +1,5 @@
 package br.com.caelum.alunos;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,12 +12,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import br.com.caelum.alunos.br.com.caelum.alunos.dao.AlunoDAO;
-import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
+import br.com.caelum.alunos.adapter.ListaAlunosAdapter;
+import br.com.caelum.alunos.dao.AlunoDAO;
+import br.com.caelum.alunos.model.Aluno;
 
 /**
  * Created by android5243 on 05/09/15.
@@ -149,9 +148,10 @@ public class ListaAlunosActivity extends ActionBarActivity {
         alunos = alunoDAO.getList();
         alunoDAO.close();
 
-        ArrayAdapter<Aluno> alunosAdapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        //ArrayAdapter<Aluno> alunosAdapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        ListaAlunosAdapter listaAlunosAdapter = new ListaAlunosAdapter(alunos, this.getLayoutInflater());
 
-        this.listView.setAdapter(alunosAdapter);
+        this.listView.setAdapter(listaAlunosAdapter);
     }
 
 }

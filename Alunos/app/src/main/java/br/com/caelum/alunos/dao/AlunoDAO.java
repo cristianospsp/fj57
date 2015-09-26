@@ -1,4 +1,4 @@
-package br.com.caelum.alunos.br.com.caelum.alunos.dao;
+package br.com.caelum.alunos.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,10 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import br.com.caelum.alunos.br.com.caelum.alunos.model.Aluno;
+import br.com.caelum.alunos.model.Aluno;
 
 /**
  * Created by android5243 on 12/09/15.
