@@ -16,7 +16,7 @@ import br.com.caelum.alunos.model.Aluno;
  */
 public class AlunoDAO extends SQLiteOpenHelper {
 
-    private static final int VERSAO = 6;
+    private static final int VERSAO = 9;
     private static final String DATABASE = "CadastroCaelum";
     private static final String TABLE = "ALUNOS";
 
@@ -29,7 +29,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         StringBuilder ddl = new StringBuilder("CREATE TABLE ")
                 .append(TABLE)
                 .append(" (id INTEGER PRIMARY KEY, nome TEXT NOT NULL,")
-                .append(" telefone TEXT, endereco TEXT, site TEXT, nota REAL);");
+                .append(" telefone TEXT, endereco TEXT, site TEXT, nota REAL, caminhoFoto TEXT);");
 
         db.execSQL(ddl.toString());
     }

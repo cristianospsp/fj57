@@ -3,6 +3,7 @@ package br.com.caelum.alunos.adapter;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,8 @@ public class ListaAlunosAdapter extends BaseAdapter {
         Bitmap imagem;
         if (aluno.getCaminhoFoto() != null) {
             imagem = BitmapFactory.decodeFile(aluno.getCaminhoFoto());
-            imagem = Bitmap.createScaledBitmap(imagem, 150, 250, true);
+//            imagem = Bitmap.createScaledBitmap(imagem, 150, 250, true);
+            imagem = ThumbnailUtils.extractThumbnail(imagem, 150, 150);
         } else {
             imagem = BitmapFactory.decodeResource(inflater.getContext().getResources(), R.drawable.ic_no_image);
             imagem = Bitmap.createScaledBitmap(imagem, 100, 100, true);

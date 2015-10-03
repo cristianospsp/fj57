@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.Arrays;
 import java.util.List;
 
+import br.com.caelum.alunos.ProvasActivity;
 import br.com.caelum.alunos.R;
 import br.com.caelum.alunos.model.Prova;
 
@@ -50,7 +51,11 @@ public class ListaProvasFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Prova provaSelecionada = (Prova) parent.getItemAtPosition(position);
-                Toast.makeText(getActivity(), "Prova selecionada: " + provaSelecionada, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "Prova selecionada: " + provaSelecionada, Toast.LENGTH_LONG).show();
+
+                ProvasActivity calendarioProvas = (ProvasActivity) getActivity();
+
+                calendarioProvas.selecionaProva(provaSelecionada);
 
             }
         });

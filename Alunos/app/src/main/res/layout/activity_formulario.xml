@@ -17,7 +17,12 @@
                 android:src="@drawable/person"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="#00A8EC"/>
+                android:background="#00A8EC"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"/>
 
             <Button
                 android:id="@+id/formulario_foto_button"

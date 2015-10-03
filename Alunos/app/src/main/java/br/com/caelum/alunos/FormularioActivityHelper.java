@@ -2,6 +2,7 @@ package br.com.caelum.alunos;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -77,7 +78,7 @@ public class FormularioActivityHelper {
 
     public void carregaImagem(String localArquivoFoto) {
         Bitmap imagemFoto = BitmapFactory.decodeFile(localArquivoFoto);
-        Bitmap imagemFotoReduzida = Bitmap.createScaledBitmap(imagemFoto, imagemFoto.getWidth(), 300, true);
+        Bitmap imagemFotoReduzida = ThumbnailUtils.extractThumbnail(imagemFoto, 200, 200);
         foto.setImageBitmap(imagemFotoReduzida);
         foto.setTag(localArquivoFoto);
         foto.setScaleType(ImageView.ScaleType.FIT_XY);
