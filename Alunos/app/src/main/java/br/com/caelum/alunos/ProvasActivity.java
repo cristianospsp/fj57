@@ -52,6 +52,7 @@ public class ProvasActivity extends ActionBarActivity {
 
             FragmentTransaction fragmentTransaction = manager.beginTransaction();
             fragmentTransaction.replace(R.id.provas_view, detalhesProvaFragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
         }
